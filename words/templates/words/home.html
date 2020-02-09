@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    App page
+{% endblock %}
+
+{% block content %}
+            <div class="row mx-auto mt-5" style="width:100%">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="container">
+                            <div class="card-header row">
+                                <h2><span class="blue">{{ new_words }}</span> <span class="red">{{ bad_words }}</span> <span class="green">{{ good_words }}</span></h2>
+                                <div class='ml-auto'>
+                                    <button type="button" class="btn btn-warning">+5 new words</button>
+                                    <button type="button" class="btn btn-info">+5 old words</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h2 class="centred">{{word.name}}</h2>
+                                    <a class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        Show answer
+                                    </a>
+                            </div>
+                        </div>
+                            
+                            <div class='row justify-content-center'>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type='hidden' name='word' value='{{word.name}}'>
+                                    <input type="submit" class="btn btn-danger btn-lg mx-5" name='_bad' value='Bad'>
+                                    <input type="submit" class="btn btn-success btn-lg mx-5" name='_good' value='Good'>
+                                    <input type="submit" class="btn btn-primary btn-lg mx-5" name='_easy' value='Easy'>
+                                </form>
+                            </div>
+                            <div class='media-body mt-2'>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <span class="centred">Image:</span>
+                                        <img class="mx-auto mb-2" width=40% src="{% static 'images/apple.jpg' %}">
+                                        <span class="centred">Translation:</span>
+                                        <span class="border border-dark rounded centred mb-2">{{word.ru_name}}</span>
+                                        <span class="centred">Value:</span>
+                                        <span class="border border-dark rounded centred mb-2">{{word.value}}</span>
+                                        <span class="centred">Example:</span>
+                                        <span class="border border-dark rounded centred">{{word.example}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}
